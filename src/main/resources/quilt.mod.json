@@ -1,25 +1,26 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "com.example",
-		"id": "example_mod",
+		"group": "xyz.sunrose",
+		"id": "bouncycastle",
 		"version": "${version}",
 		"metadata": {
-			"name": "Mod Name",
-			"description": "A short description of your mod.",
+			"name": "Bouncy Castle",
+			"description": "",
 			"contributors": {
-				"Your name here": "Owner"
+				"Sunroses": "",
+				"Aury System": ""
 			},
 			"contact": {
-				"homepage": "https://example.com/",
-				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
-				"sources": "https://github.com/QuiltMC/quilt-template-mod"
+				"homepage": "",
+				"issues": "https://github.com/deli73/bouncy-castle/issues",
+				"sources": "https://github.com/deli73/bouncy-castle"
 			},
 			"icon": "assets/example_mod/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "com.example.example_mod.ExampleMod"
+			"init": "xyz.sunrose.bouncycastle.BouncyCastle"
 		},
 		"depends": [
 			{
@@ -36,5 +37,5 @@
 			}
 		]
 	},
-	"mixin": "example_mod.mixins.json"
+	"mixin": "bouncycastle.mixins.json"
 }

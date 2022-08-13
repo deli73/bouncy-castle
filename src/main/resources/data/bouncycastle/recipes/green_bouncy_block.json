@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "W W",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:slime_ball"
+    },
+    "W": {
+      "item": "minecraft:green_wool"
+    }
+  },
+  "result": {
+    "item": "bouncycastle:green_bouncy_block",
+    "count": 4
+  }
+}

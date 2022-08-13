@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "bouncycastle:block/cyan_bouncy_block"
+  }
+}

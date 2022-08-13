@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "bouncycastle:block/red_bouncy_block"
+    }
+  }
+}

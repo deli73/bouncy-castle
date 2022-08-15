@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
@@ -41,5 +42,9 @@ public class BouncyCastle implements ModInitializer {
 			BOUNCY_BLOCKS.add(BLOCK);
 			BOUNCY_BLOCK_ITEMS.add(ITEM);
 		}
+	}
+
+	public static int round(double num){
+		return num >0.5D? MathHelper.ceil(num) : MathHelper.floor(num);
 	}
 }

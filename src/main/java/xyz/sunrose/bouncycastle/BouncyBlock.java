@@ -12,10 +12,11 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import xyz.sunrose.bouncycastle.mixins.AccessorLivingEntity;
 
-public class BouncyBlock extends Block implements specialCollisions{
-	private static final double BOUNCE_DAMPENING_FACTOR = 0.7;
-	private static final double BOUNCE_AMPLIFYING_FACTOR = 1.12;
-	private static final double MAX_BOUNCE_SPEED = 0.312; //TODO figure out reasonable value for this
+public class BouncyBlock extends Block implements SpecialCollisions {
+	private static final double BOUNCE_DAMPENING_FACTOR = 0.95;
+	private static final double SNEAK_AMPLIFYING_FACTOR = 0.7;
+	private static final double BOUNCE_AMPLIFYING_FACTOR = 2;
+	private static final double MAX_BOUNCE_SPEED = 0.7; //TODO figure out reasonable value for this
 
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.5D, 0.5D, 0.5D, 15.5D, 15.5D, 15.5D);
 
@@ -46,7 +47,9 @@ public class BouncyBlock extends Block implements specialCollisions{
 		}
 		Vec3d velocity = entity.getVelocity();
 
+		// multiply the bounce to amplify if jumping or dampen if not; dampen way more if sneaking
 		double bounceFactor = amplifying ? BOUNCE_AMPLIFYING_FACTOR : BOUNCE_DAMPENING_FACTOR;
+		bounceFactor *= entity.isSneaking() ? SNEAK_AMPLIFYING_FACTOR : 1;
 
 		if (dir == Direction.DOWN || dir == Direction.UP){
 			entity.setVelocity(velocity.x, Math.min(-velocity.y * bounceFactor, MAX_BOUNCE_SPEED), velocity.z);
@@ -61,7 +64,7 @@ public class BouncyBlock extends Block implements specialCollisions{
 	}
 
 	@Override
-	public void OnSpecialCollision(BlockView world, Entity entity, Direction dir) {
+	public void onSpecialCollision(BlockView world, Entity entity, Direction dir) {
 		this.bouncy(entity, dir);
 	}
 }

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.sunrose.bouncycastle.BouncyCastle;
 import xyz.sunrose.bouncycastle.EntityVelDuck;
-import xyz.sunrose.bouncycastle.specialCollisions;
+import xyz.sunrose.bouncycastle.SpecialCollisions;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 					from = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getProfiler()Lnet/minecraft/util/profiler/Profiler;", ordinal = 3),
 					to = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getVelocity()Lnet/minecraft/util/math/Vec3d;", ordinal = 0)
 			))
-	public void bouncycastle$SpecialCollision(MovementType movementType, Vec3d movement, CallbackInfo ci){
+	public void bouncycastle$specialCollision(MovementType movementType, Vec3d movement, CallbackInfo ci){
 		Vec3d collided = this.adjustMovementForCollisions(movement);
 		boolean xTouch = !MathHelper.approximatelyEquals(movement.x, collided.x);
 		boolean zTouch = !MathHelper.approximatelyEquals(movement.z, collided.z);
@@ -65,8 +65,8 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 			BlockPos[] aa = bouncycastle$getPosition(0.2F, dir);
 			for (BlockPos blockpos:aa) {
 				BlockState block = this.world.getBlockState(blockpos);
-				if(block.getBlock() instanceof specialCollisions b){
-					b.OnSpecialCollision( world, ((Entity) (Object)this), dir.getOpposite());
+				if(block.getBlock() instanceof SpecialCollisions b){
+					b.onSpecialCollision( world, ((Entity) (Object)this), dir.getOpposite());
 					//BouncyCastle.LOGGER.debug("bouncy?");
 					break;
 				}

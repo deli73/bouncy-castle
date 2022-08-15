@@ -70,6 +70,7 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 					//BouncyCastle.LOGGER.debug("bouncy?");
 					break;
 				}
+				//BouncyCastle.LOGGER.info("no bounce?");
 			}
 		}
 	}
@@ -95,8 +96,8 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 				return out;
 			}
 			case NORTH: {
-				int x = BouncyCastle.round(this.pos.x);
-				int zb = BouncyCastle.round(this.pos.z-((double)this.getWidth()/2) - (double)offset);
+				int x = MathHelper.floor(this.pos.x);
+				int zb = MathHelper.floor(this.pos.z-((double)this.getWidth()/2) - (double)offset);
 				BlockPos[] out = new BlockPos[zWidth*height];
 				for(int z = 0; z < zWidth; z++){
 					for(int y = 0; y < height; y++){
@@ -106,8 +107,8 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 				return out;
 			}
 			case WEST: {
-				int xb = BouncyCastle.round(this.pos.x-((double)this.getWidth()/2) - (double)offset);
-				int z = BouncyCastle.round(this.pos.z);
+				int xb = MathHelper.floor(this.pos.x-((double)this.getWidth()/2) - (double)offset);
+				int z = MathHelper.floor(this.pos.z);
 				BlockPos[] out = new BlockPos[xWidth*height];
 				for(int x = 0; x < xWidth; x++){
 					for(int y = 0; y < height; y++){
@@ -117,8 +118,8 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 				return out;
 			}
 			case EAST: {
-				int xb = BouncyCastle.round(this.pos.x+((double)this.getWidth()/2) + (double)offset);
-				int z = BouncyCastle.round(this.pos.z);
+				int xb = MathHelper.floor(this.pos.x+((double)this.getWidth()/2) + (double)offset);
+				int z = MathHelper.floor(this.pos.z);
 				BlockPos[] out = new BlockPos[xWidth*height];
 				for(int x = 0; x < xWidth; x++){
 					for(int y = 0; y < height; y++){
@@ -128,9 +129,9 @@ abstract public class EntityMoveMixin implements EntityVelDuck {
 				return out;
 			}
 			case UP : {
-				int y = BouncyCastle.round(this.pos.y + (double)this.getHeight() + (double)offset);
-				int xb = BouncyCastle.round(this.pos.x-((double)this.getWidth()/2));
-				int zb = BouncyCastle.round(this.pos.z-((double)this.getWidth()/2));
+				int y = MathHelper.floor(this.pos.y + (double)this.getHeight() + (double)offset);
+				int xb = MathHelper.floor(this.pos.x-((double)this.getWidth()/2));
+				int zb = MathHelper.floor(this.pos.z-((double)this.getWidth()/2));
 				BlockPos[] out = new BlockPos[xWidth*zWidth];
 				for(int x = 0; x < xWidth; x++){
 					for(int z = 0; z < zWidth; z++){

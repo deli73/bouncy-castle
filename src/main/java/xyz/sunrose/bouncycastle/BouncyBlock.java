@@ -18,14 +18,8 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 	private static final double BOUNCE_AMPLIFYING_FACTOR = 2;
 	private static final double MAX_BOUNCE_SPEED = 0.7; //TODO figure out reasonable value for this
 
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.5D, 0.5D, 0.5D, 15.5D, 15.5D, 15.5D);
-
 	public BouncyBlock(Settings settings) {
 		super(settings);
-	}
-
-	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return SHAPE;
 	}
 
 

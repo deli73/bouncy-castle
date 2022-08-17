@@ -4,7 +4,9 @@
   "package": "xyz.sunrose.bouncycastle.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AccessorLivingEntity"
+    "AccessorLivingEntity",
+    "EntityMoveMixin",
+    "LivingEntityJumpMixin"
   ],
   "client": [],
   "injectors": {

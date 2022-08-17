@@ -5,6 +5,7 @@ import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -33,7 +34,7 @@ public class BouncyCastle implements ModInitializer {
 			Identifier ID = new Identifier(MODID, name);
 			final Block BLOCK = Registry.register(
 					Registry.BLOCK, ID,
-					new BouncyBlock(QuiltBlockSettings.of(Material.WOOL))
+					new BouncyBlock(QuiltBlockSettings.of(Material.WOOL).sounds(BlockSoundGroup.WOOL).mapColor(color))
 			);
 			final Item ITEM = Registry.register(
 					Registry.ITEM, ID,

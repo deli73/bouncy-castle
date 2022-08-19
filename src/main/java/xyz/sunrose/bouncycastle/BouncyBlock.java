@@ -1,5 +1,7 @@
 package xyz.sunrose.bouncycastle;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -18,6 +20,8 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 	private static final double SNEAK_AMPLIFYING_FACTOR = 0.7;
 	private static final double BOUNCE_AMPLIFYING_FACTOR = 2;
 	private static final double MAX_BOUNCE_SPEED = 0.7; //TODO figure out reasonable value for this
+	private static final double SOUND_SPEED_THRESHOLD = 0.1;
+	private static final double MAX_SOUND_VELOCITY = 2;
 
 	public BouncyBlock(Settings settings) {
 		super(settings);
@@ -29,12 +33,11 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 		if (entity.bypassesLandingEffects()) {
 			super.onEntityLand(world, entity);
 		} else {
-			this.bouncy(entity, Direction.UP);
+			this.bouncy(world, entity, Direction.UP);
 		}
 
 	}
-	public void bouncy(Entity entity, Direction dir) {
-		BouncyCastle.LOGGER.debug("TEST");
+	public void bouncy(BlockView world, Entity entity, Direction dir) {
 		boolean amplifying = false;
 		if(entity instanceof LivingEntity e) {
 			AccessorLivingEntity access = (AccessorLivingEntity) e;
@@ -57,11 +60,24 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 		}
 		entity.velocityDirty = true;
 
-		entity.playSound(SoundEvents.BLOCK_SLIME_BLOCK_FALL); //add a sound to the bounce (todo custom sounds?)
+
+		// if we're bouncing hard enough, play a sound.
+		// otherwise don't, cuz constant sounds while ur just sitting on a block is weird
+		if(Math.abs(entity.getVelocity().getComponentAlongAxis(dir.getAxis())) > SOUND_SPEED_THRESHOLD) {
+			playBounceSound(entity, bounceFactor * Math.min(1, entity.getVelocity().length() / MAX_SOUND_VELOCITY));
+		}
 	}
 
 	@Override
 	public void onSpecialCollision(BlockView world, Entity entity, Direction dir) {
-		this.bouncy(entity, dir);
+		this.bouncy(world, entity, dir);
+	}
+
+	private void playBounceSound(Entity entity, double soundFactor){
+		entity.playSound(SoundEvents.BLOCK_SLIME_BLOCK_FALL,
+				0.45f * (float) soundFactor,
+				(float) (0.98 + entity.getWorld().random.nextGaussian() * 0.04)
+		); //add a sound to the bounce... todo custom sounds?
+		// TODO figure out why boats are silent?
 	}
 }

@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -32,7 +33,7 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 		}
 
 	}
-	public void bouncy(Entity entity, Direction dir) { //TODO make this work literally at all
+	public void bouncy(Entity entity, Direction dir) {
 		BouncyCastle.LOGGER.debug("TEST");
 		boolean amplifying = false;
 		if(entity instanceof LivingEntity e) {
@@ -55,6 +56,8 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 			((EntityVelDuck)entity).bouncycastle$PostHitSetXVelocity(Math.min(-velocity.x * bounceFactor,MAX_BOUNCE_SPEED));
 		}
 		entity.velocityDirty = true;
+
+		entity.playSound(SoundEvents.BLOCK_SLIME_BLOCK_FALL); //add a sound to the bounce (todo custom sounds?)
 	}
 
 	@Override

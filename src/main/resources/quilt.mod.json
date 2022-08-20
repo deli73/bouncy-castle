@@ -16,7 +16,7 @@
 				"issues": "https://github.com/deli73/bouncy-castle/issues",
 				"sources": "https://github.com/deli73/bouncy-castle"
 			},
-			"icon": "assets/example_mod/icon.png"
+			"icon": "assets/bouncycastle/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {

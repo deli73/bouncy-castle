@@ -7,12 +7,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import xyz.sunrose.bouncycastle.mixins.AccessorLivingEntity;
 
 public class BouncyBlock extends Block implements SpecialCollisions {
@@ -28,6 +30,16 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 	}
 
 
+	@Override
+	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+		if (entity.bypassesLandingEffects()) {
+			super.onLandedUpon(world, state, pos, entity, fallDistance);
+		} else {
+			entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+		}
+
+	}
+	
 	@Override
 	public void onEntityLand(BlockView world, Entity entity) {
 		if (entity.bypassesLandingEffects()) {

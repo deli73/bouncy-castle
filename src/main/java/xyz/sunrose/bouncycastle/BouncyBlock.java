@@ -1,10 +1,7 @@
 package xyz.sunrose.bouncycastle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -12,7 +9,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import xyz.sunrose.bouncycastle.mixins.AccessorLivingEntity;
@@ -86,9 +82,10 @@ public class BouncyBlock extends Block implements SpecialCollisions {
 	}
 
 	private void playBounceSound(Entity entity, double soundFactor){
+		World world = entity.getWorld();
 		entity.playSound(SoundEvents.BLOCK_SLIME_BLOCK_FALL,
 				0.45f * (float) soundFactor,
-				(float) (0.98 + entity.getWorld().random.nextGaussian() * 0.04)
+				(float) (0.98 + world.random.nextGaussian() * 0.04)
 		); //add a sound to the bounce... todo custom sounds?
 		// TODO figure out why boats are silent?
 	}

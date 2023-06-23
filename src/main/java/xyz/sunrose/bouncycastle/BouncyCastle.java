@@ -2,7 +2,6 @@ package xyz.sunrose.bouncycastle;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -33,11 +32,14 @@ public class BouncyCastle implements ModInitializer {
 		for(DyeColor color : DyeColor.values()){
 			String name = color.asString()+"_bouncy_block";
 			Identifier ID = new Identifier(MODID, name);
-			final Block BLOCK = Registry.register(
+			Block BLOCK = Registry.register(
 					Registries.BLOCK, ID,
-					new BouncyBlock(QuiltBlockSettings.of(Material.WOOL).sounds(BlockSoundGroup.WOOL).mapColor(color))
+					new BouncyBlock(QuiltBlockSettings.create()
+						.sounds(BlockSoundGroup.WOOL)
+						.mapColor(color)
+					)
 			);
-			final Item ITEM = Registry.register(
+			Item ITEM = Registry.register(
 					Registries.ITEM, ID,
 					new BlockItem(BLOCK, new Item.Settings())
 			);

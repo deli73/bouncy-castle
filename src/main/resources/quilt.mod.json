@@ -9,7 +9,8 @@
 			"description": "",
 			"contributors": {
 				"Sunroses": "concept, code",
-				"Aury System": "code, textures, fixes"
+				"Aury System": "code, textures, fixes",
+				"Hibi": "fixes"
 			},
 			"contact": {
 				"homepage": "",
@@ -25,15 +26,15 @@
 		"depends": [
 			{
 				"id": "quilt_loader",
-				"versions": ">=0.18.5-"
+				"versions": ">=0.19.1-"
 			},
 			{
 				"id": "quilted_fabric_api",
-				"versions": ">=6.0.0-"
+				"versions": ">=7.0.0-"
 			},
 			{
 				"id": "minecraft",
-				"versions": ">=1.19.4"
+				"versions": ">=1.20"
 			}
 		]
 	},
